@@ -6,8 +6,7 @@ pipeline {
         sh 'docker build -t supercool-:${BUILD_ID} .'
       }
     }
-  }
-  stage('List pods') {
+    stage('Deploy to development') {
     withKubeConfig([
         credentialsId: 'kubernetes-credentials',
         serverUrl: 'https://localhost:6443'    
@@ -16,5 +15,6 @@ pipeline {
         sh 'kubectl apply -f k8s/development.yaml'
       }
     }
+  }
   }
 }

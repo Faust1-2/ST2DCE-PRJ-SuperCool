@@ -41,7 +41,7 @@ node {
         serverUrl: 'https://localhost:6443'    
       ]) {
         echo 'Deleting deployment...'
-        sh 'helm install development-${BUILD_ID}'
+        sh 'helm uninstall development-${BUILD_ID}'
         echo 'Deleted'
       }
     }

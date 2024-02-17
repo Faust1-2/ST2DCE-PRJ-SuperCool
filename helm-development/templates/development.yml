@@ -25,7 +25,7 @@ spec:
         track: stable
     spec:
       containers:
-      - name: SuperCool
+      - name: supercool
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: Never
         ports:

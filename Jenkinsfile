@@ -12,8 +12,8 @@ node {
     }
     stage('Deploy to development') {
       withKubeConfig([
-          credentialsId: 'kubernetes-credentials',
-          serverUrl: 'https://localhost:6443'    
+        credentialsId: 'kubernetes-credentials',
+        serverUrl: 'https://localhost:6443'    
       ]) {
         sh 'kubectl apply -f k8s/development.yml'
       }
@@ -35,9 +35,14 @@ node {
     throw e
   } finally {
     stage('cleanup') {
-      echo 'Deleting deployment...'
-      sh 'kubectl delete -f k8s/development.yml'
-      echo 'Deleted'
+      withKubeConfig([
+        credentialsId: 'kubernetes-credentials',
+        serverUrl: 'https://localhost:6443'    
+      ]) {
+        echo 'Deleting deployment...'
+        sh 'kubectl delete -f k8s/development.yml'
+        echo 'Deleted'
+      }
       echo 'Deleting docker image...'
       sh 'docker rmi supercool-docker:${BUILD_ID}'
       echo 'Deleted'

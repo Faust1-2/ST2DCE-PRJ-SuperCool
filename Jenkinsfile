@@ -1,8 +1,8 @@
 node {
 
-    environment {
-      DOCKER_ID = "${BUILD_ID}"
-    }
+  environment {
+    DOCKER_ID = "${BUILD_ID}"
+  }
 
   stage('checkout') {
     checkout scm
@@ -35,7 +35,7 @@ node {
   success {
     sh 'kubectl apply -f k8s/production.yml'
   }
-  error {
+  failure {
     echo 'Deployment failed'
   }
 }

@@ -1,0 +1,5 @@
+image:
+  repository: supercool-docker
+  pullPolicy: Never
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: lastest

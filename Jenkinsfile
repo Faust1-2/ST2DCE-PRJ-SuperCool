@@ -1,10 +1,6 @@
 node {
   def status = 000 // Default status code
 
-  environment {
-    DOCKER_TAG = "${BUILD_ID}"
-  }
-
   stage('checkout') {
     checkout scm
   }
@@ -19,7 +15,7 @@ node {
         credentialsId: 'kubernetes-credentials',
         serverUrl: 'https://localhost:6443'    
       ]) {
-        sh 'kubectl apply -f k8s/development.yml'
+        sh 'helm install development-${BUILD_ID} helm-development/ --set image.tag=${BUILD_ID}'
       }
     }
 
@@ -45,7 +41,7 @@ node {
         serverUrl: 'https://localhost:6443'    
       ]) {
         echo 'Deleting deployment...'
-        sh 'kubectl delete -f k8s/development.yml'
+        sh 'helm install development-${BUILD_ID}'
         echo 'Deleted'
       }
     }
@@ -58,7 +54,7 @@ node {
           credentialsId: 'kubernetes-credentials',
           serverUrl: 'https://localhost:6443'    
         ]) {
-          sh 'kubectl apply -f k8s/production.yml'
+          sh 'helm install development-${BUILD_ID} helm-production/ --set image.tag=${BUILD_ID}'
         }
       }
 

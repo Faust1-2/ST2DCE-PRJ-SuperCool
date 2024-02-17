@@ -1,7 +1,10 @@
-ARG VARIABLE=
+ARG VARIABLE=0.0.1-SNAPSHOT
 
 # Use an official Maven image as a build stage
 FROM maven:3.8.4-openjdk-17 AS build
+
+# Set the environment variable
+ENV VARIABLE=$VARIABLE
 
 # Set the working directory
 WORKDIR /app

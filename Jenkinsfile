@@ -1,6 +1,6 @@
 node {
   stage('build docker image') {
-    sh 'docker build -t supercool-:${BUILD_ID} .'
+    sh 'docker build -t supercool-docker:${BUILD_ID} .'
   }
   stage('Deploy to development') {
     withKubeConfig([

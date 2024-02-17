@@ -1,12 +1,9 @@
-ARG VARIABLE
-
 # Use an official Maven image as a build stage
 FROM maven:3.8.4-openjdk-17 AS build
 
 # Set the environment variable
-ENV VERSION_ID=$
-
-RUN echo $VERSION_ID
+ARG VARIABLE
+ENV VERSION_ID $VARIABLE
 
 # Set the working directory
 WORKDIR /app

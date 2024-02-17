@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: devops-api
-        image: devops-api:${DOCKER_ID}
+        image: devops-api:${DOCKER_TAG}
         imagePullPolicy: Never
         ports:
         - containerPort: 8080

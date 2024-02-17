@@ -32,6 +32,7 @@ node {
   post {
     always {
       sh 'kubectl delete -f k8s/development.yml'
+      echo 'Deleted development deployment'
     }
     success {
       sh 'kubectl apply -f k8s/production.yml'

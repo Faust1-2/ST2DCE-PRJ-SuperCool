@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.efrei</groupId>
 	<artifactId>st2dce</artifactId>
-	<version>{VARIABLE}</version>
+	<version>${VARIABLE}</version>
 	<name>st2dce</name>
 	<description>Demo project for ST2DCE</description>
 	<properties>

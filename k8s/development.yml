@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development
+  labels:
+    name: development
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops
+      tier: project
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: devops
+        tier: project
+        track: stable
+    spec:
+      containers:
+      - name: devops-api
+        image: devops-api:{BUILD_ID}
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-service
+  namespace: development
+spec:
+  selector:
+    app: devops
+    tier: project
+  ports:
+  - port: 8082
+    targetPort: 8080
+  type: LoadBalancer

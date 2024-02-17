@@ -25,7 +25,7 @@ spec:
         track: stable
     spec:
       containers:
-      - name: devops-api:${BUILD_ID}
+      - name: devops-api:${DOCKER_ID}
         image: devops-api
         imagePullPolicy: Never
         ports:

@@ -1,4 +1,9 @@
 node {
+
+    environment {
+      DOCKER_ID = "${BUILD_ID}"
+    }
+
   stage('checkout') {
     checkout scm
   }

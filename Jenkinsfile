@@ -1,4 +1,4 @@
-ndoe {
+node {
   stage('build docker image') {
     steps {
       sh 'docker build -t supercool-:${BUILD_ID} .'

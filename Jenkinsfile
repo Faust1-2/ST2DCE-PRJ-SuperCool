@@ -18,15 +18,19 @@ node {
     def status = sh(script: 'curl --silent --output /dev/null --write-out "%{http_code}" localhost:8082', returnStatus: true)
 
     // Check the status
-    if (status == 0) {
-        echo 'ok'
-        stage('OK Stage') {
-            steps {
-                echo 'ok'
-            }
-        }
+    if (status[0] == 2 ) {
+      success('works')
     } else {
-        error('fails')
+      error('fails')
     }
+  }
+  always {
+    sh 'kubectl delete -f k8s/development.yml'
+  }
+  success {
+    sh 'kubectl apply -f k8s/production.yml'
+  }
+  error {
+    echo 'Deployment failed'
   }
 }

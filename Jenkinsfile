@@ -20,6 +20,7 @@ node {
     }
 
     stage('Check deployment status') {
+      sleep(1) // Wait for the deployment to be ready
       // Try to curl localhost:8082
       status = sh(script: 'curl --silent --output /dev/null --write-out "%{http_code}" localhost:8082', returnStatus: true)
 

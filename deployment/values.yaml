@@ -13,7 +13,7 @@ image:
   tag: lastest
 
 deploymentPort:
-- containerPort: 8080
+  containerPort: 8080
 
 service:
   name: devops-service

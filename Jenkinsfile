@@ -13,7 +13,7 @@ node {
         credentialsId: 'kubernetes-credentials',
         serverUrl: 'https://localhost:6443'    
       ]) {
-        sh 'helm install development-${BUILD_ID} deployment/ --set image.tag=${BUILD_ID} --set metadata.namespace=development --set metadata.service.targetPort=8082'
+        sh 'helm install development-${BUILD_ID} deployment/ --set image.tag=${BUILD_ID} --set metadata.namespace=development --set service.port=8082'
       }
     }
 

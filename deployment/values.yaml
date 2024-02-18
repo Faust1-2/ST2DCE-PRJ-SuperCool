@@ -17,7 +17,6 @@ deploymentPort:
 
 service:
   name: devops-service
-  namespace: production
   type: LoadBalancer
   port: 80
   targetPort: 8080

@@ -13,14 +13,14 @@ node {
         credentialsId: 'kubernetes-credentials',
         serverUrl: 'https://localhost:6443'    
       ]) {
-        sh 'helm install development-${BUILD_ID} deployment/ --set image.tag=${BUILD_ID} --set metadata.namespace=development'
+        sh 'helm install development-${BUILD_ID} deployment/ --set image.tag=${BUILD_ID} --set metadata.namespace=development --set metadata.service.targetPort=8082'
       }
     }
 
     stage('Check deployment status') {
       sleep(10) // Wait for the deployment to be ready
       // Try to curl localhost:8082
-      final String status = sh(script: 'curl --silent --output /dev/null --write-out "%{http_code}" localhost:80', returnStdout: true)
+      final String status = sh(script: 'curl --silent --output /dev/null --write-out "%{http_code}" localhost:8082', returnStdout: true)
       
       echo status
 

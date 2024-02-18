@@ -23,17 +23,3 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.deploymentPort.containerPort }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.service.name }}
-  namespace: {{ .Values.service.namespace }}
-spec:
-  selector:
-    app: devops
-    tier: project
-  ports:
-  - port: {{ .Values.service.port }}
-    targetPort: {{ .Values.service.targetPort}}
-  type: {{ .Values.service.type}}

@@ -1,0 +1,27 @@
+metadata:
+  name: supercool-namespace
+  namespace: production
+  labels:
+    name: super-cool-namespace
+
+replicaCount: 1
+
+image:
+  repository: supercool-docker
+  pullPolicy: Never
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: lastest
+
+deploymentPort:
+- containerPort: 8080
+
+service:
+  name: devops-service
+  namespace: production
+  type: LoadBalancer
+  port: 80
+  targetPort: 8080
+  selector:
+    app: devops
+    tier: project
+```
